@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PULSE Media | Digital Marketing Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --pulse-red: #ff003c;
+            --bg-black: #050505;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-black);
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER --- */
+        .header-main {
+            display: flex; justify-content: center; padding: 15px 6%;
+            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+        }
+
+        .header-content { display: flex; flex-direction: column; align-items: center; gap: 5px; text-decoration: none; }
+        .top-row { display: flex; align-items: center; gap: 12px; }
+
+        .play-button-container {
+            position: relative; width: 40px; height: 40px; background: #ffffff;
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            clip-path: polygon(25% 15%, 85% 50%, 25% 85%); flex-shrink: 0;
+        }
+
+        .pulse-path {
+            fill: none; stroke: var(--pulse-red); stroke-width: 6; stroke-linecap: round;
+            animation: heartbeat 2s infinite linear;
+        }
+
+        @keyframes heartbeat { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+
+        .brand-name { font-weight: 900; font-size: 1.6rem; color: #ffffff; letter-spacing: -1px; text-transform: uppercase; line-height: 1; }
+        .brand-name span { color: var(--pulse-red); font-weight: 400; }
+        .brand-slogan { font-size: 8.5px; font-weight: 700; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 2px; }
+
+        /* --- HERO --- */
+        .hero-container {
+            min-height: 55vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 130px 24px 20px 24px; position: relative;
+        }
+
+        .glow {
+            position: absolute; width: 350px; height: 350px; background: var(--pulse-red);
+            filter: blur(150px); opacity: 0.08; z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        }
+
+        .hero-title { font-size: clamp(2.2rem, 8vw, 5.5rem); font-weight: 900; line-height: 0.9; text-transform: uppercase; letter-spacing: -2px; margin-bottom: 15px; }
+        .hero-title span { display: block; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5); }
+        .hero-desc { max-width: 550px; font-size: 1rem; color: rgba(255, 255, 255, 0.5); line-height: 1.5; margin-bottom: 25px; }
+
+        .btn-main { background: #ffffff; color: #000000; padding: 14px 35px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; }
+        .btn-main:hover { background: var(--pulse-red); color: #ffffff; }
+
+        /* --- SOCIAL PLATFORMS --- */
+        .social-platforms {
+            padding: 20px 8%; background: rgba(255, 255, 255, 0.01);
+            border-top: 1px solid rgba(255, 255, 255, 0.03); display: flex; flex-direction: column; align-items: center;
+        }
+
+        .platforms-label { font-size: 9px; text-transform: uppercase; letter-spacing: 3px; color: rgba(255, 255, 255, 0.2); margin-bottom: 20px; font-weight: 800; }
+        .icons-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%; }
+        .social-card { display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0.4; width: 65px; text-decoration: none; color: #ffffff; transition: 0.3s; }
+        .social-card:hover { opacity: 1; color: var(--pulse-red); }
+        .social-card i { font-size: 22px; }
+        .social-card span { font-size: 7.5px; font-weight: 700; text-transform: uppercase; }
+
+        /* --- DUAL PATH SERVICE DETAILS --- */
+        .dual-services { padding: 50px 8%; background: #000; border-top: 1px solid rgba(255,255,255,0.05); }
+        .services-header { text-align: center; margin-bottom: 40px; }
+        .services-main-title { font-size: clamp(1.8rem, 6vw, 2.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -1px; }
+        .services-main-title span { color: var(--pulse-red); }
+
+        .dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1100px; margin: 0 auto; }
+
+        .path-container {
+            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 30px; transition: 0.4s; display: flex; flex-direction: column; position: relative;
+        }
+
+        .criteria-badge {
+            position: absolute; top: 15px; right: 15px; background: var(--pulse-red); color: #fff;
+            font-size: 8px; font-weight: 900; padding: 4px 10px; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .brands-path:hover { border-color: #fff; background: rgba(255, 255, 255, 0.04); }
+        .influencers-path:hover { border-color: var(--pulse-red); background: rgba(255, 0, 60, 0.03); }
+
+        .path-header i { font-size: 32px; margin-bottom: 15px; color: var(--pulse-red); }
+        .path-header h3 { font-size: 1.6rem; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; }
+        .path-header p { color: rgba(255,255,255,0.4); font-size: 0.85rem; margin-bottom: 30px; }
+
+        .service-list { margin-bottom: 30px; flex-grow: 1; }
+        .service-item { display: flex; gap: 12px; margin-bottom: 20px; align-items: flex-start; }
+        .service-item i { font-size: 12px; margin-top: 4px; }
+        
+        .service-item h4 { font-size: 0.9rem; font-weight: 800; text-transform: uppercase; color: #fff; margin-bottom: 4px; }
+        .service-item p { font-size: 0.8rem; color: rgba(255,255,255,0.4); line-height: 1.4; }
+
+        .path-btn {
+            width: 100%; padding: 14px; font-weight: 900; text-transform: uppercase; font-size: 10px;
+            letter-spacing: 2px; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: #fff; cursor: pointer; transition: 0.3s;
+        }
+        .brands-path .path-btn:hover { background: #fff; color: #000; }
+        .influencers-path .path-btn:hover { background: var(--pulse-red); color: #fff; border-color: var(--pulse-red); }
+
+        /* --- BRAND MARQUEE --- */
+        .brand-marquee-container {
+            background: rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 50px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .marquee-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+
+        .brand-unit { display: flex; align-items: center; margin: 0 60px; transition: 0.4s; }
+
+        .brand-unit img {
+            height: 60px; width: auto; max-width: 180px; object-fit: contain;
+            filter: brightness(0) invert(1); opacity: 0.8; transition: 0.4s ease;
+        }
+
+        .brand-unit:hover img { opacity: 1; filter: none; transform: scale(1.2); }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-title {
+            text-align: center; font-size: 11px; text-transform: uppercase; letter-spacing: 5px;
+            color: rgba(255, 255, 255, 0.2); margin-bottom: 30px; font-weight: 900;
+        }
+
+        /* --- RATINGS SECTION --- */
+        .rating-card:hover { border-color: var(--pulse-red) !important; background: rgba(255, 255, 255, 0.05) !important; transform: translateY(-5px); }
+
+        .submit-review-btn {
+            padding: 15px 40px; background: transparent; border: 2px solid #fff; color: #fff;
+            font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; cursor: pointer;
+            position: relative; transition: 0.4s; overflow: hidden;
+        }
+
+        .submit-review-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: #fff; transition: 0.4s; z-index: 1;
+        }
+
+        .submit-review-btn:hover::before { left: 0; }
+        .submit-review-btn:hover { color: #000 !important; }
+        .submit-review-btn span { position: relative; z-index: 2; }
+
+        /* --- MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(15px);
+            display: none; justify-content: center; align-items: center; z-index: 10000; padding: 20px;
+        }
+        .modal-content {
+            background: #0a0a0a; border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px; max-width: 600px; width: 100%; position: relative;
+            max-height: 85vh; overflow-y: auto; border-radius: 4px;
+        }
+        .modal-close { position: absolute; top: 20px; right: 20px; color: #fff; font-size: 20px; cursor: pointer; transition: 0.3s; }
+        .modal-close:hover { color: var(--pulse-red); }
+        .policy-text h3 { color: var(--pulse-red); font-size: 1.1rem; margin: 25px 0 10px; text-transform: uppercase; font-weight: 900; letter-spacing: 1px; }
+        .policy-text p { color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.7; margin-bottom: 12px; }
+
+        @media (max-width: 850px) {
+            .dual-grid { grid-template-columns: 1fr; }
+            .hero-container { padding-top: 140px; }
+            .brand-unit img { height: 45px; }
+            .brand-unit { margin: 0 35px; }
+            .submit-review-btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-main">
+        <a href="#" class="header-content">
+            <div class="top-row">
+                <div class="play-button-container">
+                    <svg width="100%" height="100%" viewBox="0 0 100 100" style="position: absolute;">
+                        <path class="pulse-path" d="M0,50 L30,50 L40,30 L50,70 L60,50 L100,50" stroke-dasharray="100" stroke-dashoffset="100" />
+                    </svg>
+                </div>
+                <div class="brand-name">PULSE<span> Media</span></div>
+            </div>
+            <div class="brand-slogan">#best Digital Marketing agency in India</div>
+        </a>
+    </header>
+
+    <main class="hero-container">
+        <div class="glow"></div>
+        <h1 class="hero-title">Own the <span>Digital Wave</span></h1>
+        <p class="hero-desc">Connecting Top brands with high-performance influencers for guaranteed impact.</p>
+        <button class="btn-main" onclick="openWhatsApp()">Work With Us</button>
+    </main>
+
+    <section class="social-platforms">
+        <div class="platforms-label">Our Specialized Platforms</div>
+        <div class="icons-grid">
+            <a href="https://www.instagram.com/agency_pulsemedia?igsh=MW0zY2FqbGdzM2h1Zw==" target="_blank" class="social-card"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+            <a href="#" class="social-card"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+            <a href="#" class="social-card"><i class="fab fa-tiktok"></i><span>TikTok</span></a>
+            <a href="#" class="social-card"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
+            <a href="#" class="social-card"><i class="fab fa-x-twitter"></i><span>X</span></a>
+            <a href="#" class="social-card"><i class="fab fa-snapchat"></i><span>Snapchat</span></a>
+            <a href="#" class="social-card"><i class="fab fa-linkedin-in"></i><span>LinkedIn</span></a>
+            <a href="#" class="social-card"><i class="fab fa-pinterest-p"></i><span>Pinterest</span></a>
+        </div>
+    </section>
+
+    <section class="dual-services">
+        <div class="services-header">
+            <div class="platforms-label" style="color: var(--pulse-red);">Premium Connect</div>
+            <h2 class="services-main-title">One Pulse. <span>Dual</span> Success.</h2>
+        </div>
+
+        <div class="dual-grid">
+            <div id="brand-path" class="path-container brands-path">
+                <div class="criteria-badge" style="background: #fff; color: #000;">50% Advance Required</div>
+                <div class="path-header">
+                    <i class="fas fa-rocket"></i>
+                    <h3>For Brands</h3>
+                    <p>Drive Exponential Sales</p>
+                </div>
+                <div class="service-list">
+                    <div class="service-item">
+                        <i class="fas fa-check" style="color:#fff"></i>
+                        <div>
+                            <h4>Top Tier Collaborations</h4>
+                            <p>Hum brands ko Top-perfect influencers se connect karte hain jo real sales generate karte hain.</p>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-shield-halved" style="color:#fff"></i>
+                        <div>
+                            <h4>Verified Marketing</h4>
+                            <p>Campaign shuru karne ke liye 50% advance payment mandatory hai.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="path-btn" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLScPRRzmsEPWQAfJUZQwpj3gzC-iAIPYcFUi7XmzEXLr2-cdGw/viewform?usp=publish-editor', '_blank')">Grow My Brand</button>
+            </div>
+
+            <div id="creator-path" class="path-container influencers-path">
+                <div class="criteria-badge">1000+ Followers Required</div>
+                <div class="path-header">
+                    <i class="fas fa-crown"></i>
+                    <h3>For Influencers</h3>
+                    <p>Monetize Your Influence</p>
+                </div>
+                <div class="service-list">
+                    <div class="service-item">
+                        <i class="fas fa-bolt" style="color:var(--pulse-red)"></i>
+                        <div>
+                            <h4>Earn Every Time</h4>
+                            <p>Agar aapke 1000+ real followers hain, toh hum aapko premium deals dete hain.</p>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-bolt" style="color:var(--pulse-red)"></i>
+                        <div>
+                            <h4>Deal Protection</h4>
+                            <p>Deal finalise hone se payment milne tak ka sara process Pulse Media handle karta hai.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="path-btn" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSd73_7_-i_cBBTktGlOxLGhqM6lB6vm_hD4RtBshJ5RUz7Tfw/viewform?usp=publish-editor', '_blank')">Start Earning</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="brand-marquee-container">
+        <div class="marquee-title">Trusted Partner Network</div>
+        <div class="marquee-track">
+            <div class="brand-unit"><img src="https://i.postimg.cc/gjZQrKZX/1000351150-removebg-preview.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/mZvKJK0v/1000351169-removebg-preview.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/BnskQHQS/slazzer-preview-18pcn.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/y8BtYc6t/slazzer-preview-elm81.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/T2zBFBzg/slazzer-preview-nkgpt.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/wjHZTLT6/slazzer-preview-qdzg6.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/5N8DVnJK/slazzer-preview-uqf05.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/GmQNBtHp/slazzer-preview-uyuqx.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/GpvjBSMS/1000351194-removebg-preview.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/VNXFSH72/1000351195-removebg-preview.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/25nxqXHW/1000351196-removebg-preview.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/gjZQrKZX/1000351150-removebg-preview.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/mZvKJK0v/1000351169-removebg-preview.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/BnskQHQS/slazzer-preview-18pcn.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/y8BtYc6t/slazzer-preview-elm81.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/T2zBFBzg/slazzer-preview-nkgpt.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/wjHZTLT6/slazzer-preview-qdzg6.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/5N8DVnJK/slazzer-preview-uqf05.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/GmQNBtHp/slazzer-preview-uyuqx.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/GpvjBSMS/1000351194-removebg-preview.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/VNXFSH72/1000351195-removebg-preview.png"></div>
+            <div class="brand-unit"><img src="https://i.postimg.cc/25nxqXHW/1000351196-removebg-preview.png"></div>
+        </div>
+    </div>
+
+    <section class="reviews-section" style="padding: 60px 8%; background: #050505;">
+        <div class="services-header" style="text-align: center; margin-bottom: 30px;">
+            <div class="platforms-label" style="color: var(--pulse-red);">Verified Community</div>
+            <h2 class="services-main-title">Wall of <span>Trust</span></h2>
+        </div>
+        <div style="text-align: center; margin-bottom: 50px;">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScO1y5H8VEnwogU-Cul5VbRS2qtEt5Mw4hzuQ5DzrSzXOf-pA/viewform?usp=publish-editor" target="_blank" style="text-decoration: none;">
+                <button class="submit-review-btn"><span><i class="fas fa-pen-nib" style="margin-right: 10px;"></i> Submit Your Review</span></button>
+            </a>
+            <p style="font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 15px; text-transform: uppercase; letter-spacing: 1px;">Verified via Google</p>
+        </div>
+        <div id="reviews-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto;">
+            <div id="loader" style="color: rgba(255,255,255,0.3); text-align: center; grid-column: 1/-1; padding: 40px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;">
+                <i class="fas fa-sync fa-spin"></i> Loading Live Ratings...
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 80px 8% 40px 8%; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto;">
+            <div>
+                <div class="brand-name" style="margin-bottom: 20px;">PULSE<span> Media</span></div>
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 25px;">Dominating the digital landscape by connecting high-caliber brands with the world's most influential creators.</p>
+                <div style="display: flex; gap: 20px;">
+                    <a href="https://www.instagram.com/agency_pulsemedia?igsh=MW0zY2FqbGdzM2h1Zw==" target="_blank" style="color: rgba(255,255,255,0.4); font-size: 18px; transition: 0.3s;" onmouseover="this.style.color='var(--pulse-red)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color: rgba(255,255,255,0.4); font-size: 18px; transition: 0.3s;" onmouseover="this.style.color='var(--pulse-red)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" style="color: rgba(255,255,255,0.4); font-size: 18px; transition: 0.3s;" onmouseover="this.style.color='var(--pulse-red)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #fff; margin-bottom: 25px; font-weight: 900;">Navigation</h4>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 15px;"><a href="#brand-path" style="text-decoration: none; color: rgba(255,255,255,0.4); font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'">Brand Services</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#creator-path" style="text-decoration: none; color: rgba(255,255,255,0.4); font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'">Creator Hub</a></li>
+                    <li style="margin-bottom: 15px;"><a href="javascript:void(0)" onclick="openPolicy()" style="text-decoration: none; color: rgba(255,255,255,0.4); font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'">Privacy & Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #fff; margin-bottom: 25px; font-weight: 900;">Contact Us</h4>
+                <p style="font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 8px;">pulsemediaagency@proton.me</p>
+                <p style="font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 25px;">Global Reach </p>
+                <button onclick="openWhatsApp()" style="padding: 12px 28px; background: transparent; border: 1px solid var(--pulse-red); color: #fff; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='var(--pulse-red)'" onmouseout="this.style.background='transparent'">Get in Touch</button>
+            </div>
+        </div>
+        <div style="margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.03); text-align: center;">
+            <p style="font-size: 9px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 3px; font-weight: 700;">&copy; 2026 Pulse Media Agency. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <div id="privacyModal" class="modal-overlay">
+        <div class="modal-content">
+            <i class="fas fa-times modal-close" onclick="closePolicy()"></i>
+            <div class="policy-text">
+                <h2 style="font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; border-bottom: 2px solid var(--pulse-red); display: inline-block; margin-bottom: 20px;">Privacy Policy</h2>
+                <p><strong>Last Updated: February 2026</strong></p>
+                <h3>1. Information Collection</h3>
+                <p>Hum sirf wahi data collect karte hain jo aap contact form bharte waqt ya review submit karte waqt dete hain (Name, Social Media Handle, Email).</p>
+                <h3>2. Data Usage</h3>
+                <p>Aapka data sirf collaborations finalize karne ke liye use hota hai. Hum ise kisi third-party ko sell nahi karte.</p>
+                <h3>3. Security</h3>
+                <p>Hum aapke data ko secure rakhne ke liye encryption aur secure servers ka istemal karte hain.</p>
+                <h3>4. Your Rights</h3>
+                <p>Aap kisi bhi waqt humein mail karke apna data remove karne ke request kar sakte hain.</p>
+            </div>
+            <button onclick="closePolicy()" style="margin-top: 30px; width: 100%; padding: 15px; background: #fff; color: #000; font-weight: 900; text-transform: uppercase; cursor: pointer; border: none; font-size: 10px; letter-spacing: 2px;">I Understand</button>
+        </div>
+    </div>
+
+    <a href="https://wa.me/message/MEZ4ZYEFZ54DN1" target="_blank" style="position: fixed; bottom: 30px; right: 30px; background: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 28px; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); z-index: 9999; text-decoration: none; transition: 0.4s;" onmouseover="this.style.transform='scale(1.1) rotate(10deg)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        function openPolicy() {
+            document.getElementById('privacyModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closePolicy() {
+            document.getElementById('privacyModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        function openWhatsApp() {
+            window.open('https://wa.me/message/MEZ4ZYEFZ54DN1', '_blank');
+        }
+
+        async function fetchReviews() {
+            // Replace with your actual Apps Script URL to make the 'Wall of Trust' live
+            const sheetURL = 'YOUR_APPS_SCRIPT_WEB_APP_URL'; 
+            const container = document.getElementById('reviews-container');
+            const loader = document.getElementById('loader');
+
+            try {
+                const response = await fetch(sheetURL);
+                const data = await response.json();
+                loader.style.display = 'none';
+                data.forEach(item => {
+                    const roleColor = item.role.toLowerCase().includes('brand') ? '#00d4ff' : '#00ff88';
+                    container.innerHTML += `
+                        <div class="rating-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 25px; border-radius: 4px; transition: 0.3s ease;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                                <div style="color: #ffcc00; font-size: 11px;">${'<i class="fas fa-star"></i>'.repeat(parseInt(item.rating))}</div>
+                                <span style="font-size: 8px; color: ${roleColor}; text-transform: uppercase; font-weight: 900; letter-spacing: 1px;"><i class="fas fa-check-circle"></i> ${item.role}</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 20px; font-style: italic;">"${item.review}"</p>
+                            <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;"><h4 style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #fff; letter-spacing: 1px;">${item.name}</h4></div>
+                        </div>`;
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                loader.innerHTML = "Syncing with live data source...";
+            }
+        }
+        window.onload = fetchReviews;
+    </script>
+</body>
+  </html>
