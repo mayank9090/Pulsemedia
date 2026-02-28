@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PULSE Media | Digital Marketing Agency</title>
+    
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/gjZQrKZX/1000351150-removebg-preview.png">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/gjZQrKZX/1000351150-removebg-preview.png">
+
+    <meta name="description" content="PULSE Media - India's best Digital Marketing agency connecting top brands with high-performance influencers.">
+    <meta name="keywords" content="Pulse Media, Digital Marketing India, Influencer Marketing, Brand Growth">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -193,6 +200,9 @@
             .brand-unit img { height: 45px; }
             .brand-unit { margin: 0 35px; }
             .submit-review-btn { width: 100%; }
+            #reviews-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding-bottom: 20px; -ms-overflow-style: none; scrollbar-width: none; }
+            #reviews-container::-webkit-scrollbar { display: none; }
+            .rating-card { min-width: 280px; scroll-snap-align: center; }
         }
     </style>
 </head>
@@ -259,7 +269,7 @@
                         <i class="fas fa-shield-halved" style="color:#fff"></i>
                         <div>
                             <h4>Verified Marketing</h4>
-                            <p>Campaign shuru karne ke liye 50% advance payment mandatory hai.kyun ki yeh security purpose hai jo brands or Creators dono ko secure rakhta hai</p>
+                            <p>Campaign shuru karne ke liye 50% advance payment mandatory hai. Yeh dono Ko secure Rakhta hai.</p>
                         </div>
                     </div>
                 </div>
@@ -408,33 +418,57 @@
         }
 
         async function fetchReviews() {
-            // Replace with your actual Apps Script URL to make the 'Wall of Trust' live
-            const sheetURL = 'YOUR_APPS_SCRIPT_WEB_APP_URL'; 
+            const sheetId = '1xK-mu1vT5s1N4W60mJhzTl2-wEctJlJikPDIte3MtcE';
+            const base = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
             const container = document.getElementById('reviews-container');
             const loader = document.getElementById('loader');
 
             try {
-                const response = await fetch(sheetURL);
-                const data = await response.json();
-                loader.style.display = 'none';
-                data.forEach(item => {
-                    const roleColor = item.role.toLowerCase().includes('brand') ? '#00d4ff' : '#00ff88';
-                    container.innerHTML += `
-                        <div class="rating-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 25px; border-radius: 4px; transition: 0.3s ease;">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-                                <div style="color: #ffcc00; font-size: 11px;">${'<i class="fas fa-star"></i>'.repeat(parseInt(item.rating))}</div>
-                                <span style="font-size: 8px; color: ${roleColor}; text-transform: uppercase; font-weight: 900; letter-spacing: 1px;"><i class="fas fa-check-circle"></i> ${item.role}</span>
-                            </div>
-                            <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 20px; font-style: italic;">"${item.review}"</p>
-                            <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;"><h4 style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #fff; letter-spacing: 1px;">${item.name}</h4></div>
-                        </div>`;
-                });
+                const response = await fetch(base);
+                const text = await response.text();
+                const data = JSON.parse(text.substr(47).slice(0, -2));
+                const rows = data.table.rows;
+
+                if (rows && rows.length > 1) {
+                    loader.style.display = 'none';
+                    let finalHTML = '';
+
+                    for (let i = rows.length - 1; i >= 0; i--) {
+                        const row = rows[i].c;
+                        if (!row) continue;
+
+                        const name = row[1] ? row[1].v : '';
+                        const role = row[2] ? row[2].v : 'Partner';
+                        const ratingStr = row[3] ? row[3].v.toString() : '5';
+                        const rating = parseInt(ratingStr.match(/\d+/) || 5);
+                        const review = row[4] ? row[4].v : '';
+
+                        if (i === 0 || name === "Full Name" || !review || review.trim() === "" || review.toLowerCase().includes("rating")) {
+                            continue;
+                        }
+
+                        const roleColor = role.toLowerCase().includes('brand') ? '#00d4ff' : '#00ff88';
+                        
+                        finalHTML += `
+                            <div class="rating-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 25px; border-radius: 4px; transition: 0.3s ease;">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                                    <div style="color: #ffcc00; font-size: 11px;">${'<i class="fas fa-star"></i>'.repeat(rating)}</div>
+                                    <span style="font-size: 8px; color: ${roleColor}; text-transform: uppercase; font-weight: 900; letter-spacing: 1px;"><i class="fas fa-check-circle"></i> ${role}</span>
+                                </div>
+                                <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 20px; font-style: italic;">"${review}"</p>
+                                <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;"><h4 style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #fff; letter-spacing: 1px;">${name}</h4></div>
+                            </div>`;
+                    }
+                    container.innerHTML = finalHTML;
+                } else {
+                    loader.innerHTML = "Wall of Trust is updating...";
+                }
             } catch (error) {
                 console.error('Error:', error);
-                loader.innerHTML = "Syncing with live data source...";
+                loader.innerHTML = "Waiting for verified reviews...";
             }
         }
         window.onload = fetchReviews;
     </script>
 </body>
-  </html>
+    </html>
