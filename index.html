@@ -76,6 +76,13 @@
         .btn-main { background: #ffffff; color: #000000; padding: 14px 35px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; }
         .btn-main:hover { background: var(--pulse-red); color: #ffffff; }
 
+        /* --- STATS SECTION --- */
+        .stats-section { padding: 60px 8%; background: #000; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; max-width: 1000px; margin: 40px auto 0 auto; }
+        .stat-item h2 { font-size: 2.5rem; font-weight: 900; color: #fff; margin-bottom: 5px; }
+        .stat-item h2 span { color: var(--pulse-red); }
+        .stat-item p { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.4); font-weight: 800; }
+
         /* --- SOCIAL PLATFORMS --- */
         .social-platforms {
             padding: 20px 8%; background: rgba(255, 255, 255, 0.01);
@@ -228,6 +235,29 @@
         <p class="hero-desc">Connecting Top brands with high-performance influencers for guaranteed impact.</p>
         <button class="btn-main" onclick="openWhatsApp()">Work With Us</button>
     </main>
+
+    <section class="stats-section">
+        <div class="platforms-label" style="color: var(--pulse-red);">Our Track Record</div>
+        <h2 class="services-main-title">Service Impact in <span>Numbers</span></h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h2>150<span>+</span></h2>
+                <p>Happy Brands</p>
+            </div>
+            <div class="stat-item">
+                <h2>500<span>+</span></h2>
+                <p>Top Influencers</p>
+            </div>
+            <div class="stat-item">
+                <h2>1M<span>+</span></h2>
+                <p>Total Reach</p>
+            </div>
+            <div class="stat-item">
+                <h2>100<span>%</span></h2>
+                <p>Campaign Success</p>
+            </div>
+        </div>
+    </section>
 
     <section class="social-platforms">
         <div class="platforms-label">Our Specialized Platforms</div>
@@ -386,7 +416,7 @@
             <i class="fas fa-times modal-close" onclick="closePolicy()"></i>
             <div class="policy-text">
                 <h2 style="font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; border-bottom: 2px solid var(--pulse-red); display: inline-block; margin-bottom: 20px;">Privacy Policy</h2>
-                <p><strong>Last Updated: February 2026</strong></p>
+                <p><strong>Last Updated: February 2025</strong></p>
                 <h3>1. Information Collection</h3>
                 <p>Hum sirf wahi data collect karte hain jo aap contact form bharte waqt ya review submit karte waqt dete hain (Name, Social Media Handle, Email).</p>
                 <h3>2. Data Usage</h3>
@@ -471,4 +501,4 @@
         window.onload = fetchReviews;
     </script>
 </body>
-                    </html>
+                </html>
